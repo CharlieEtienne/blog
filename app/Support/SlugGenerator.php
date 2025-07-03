@@ -20,7 +20,7 @@ class SlugGenerator
     {
         $baseSlug = Str::slug($title);
         $slug = $baseSlug;
-        $count = 1;
+        $count = 2;
 
         while (
             $modelClass::query()
