@@ -11,7 +11,6 @@ use Filament\Support\Enums\FontFamily;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ColorColumn;
 
 class CategoriesTable
 {
