@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -37,6 +39,20 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                fn() => Blade::render(<<<HTML
+                    <x-filament::button
+                        tag="a"
+                        href="/"
+                        icon="heroicon-m-arrow-up-right"
+                        icon-position="after"
+                        color="gray"
+                    >
+                        {{__('View site')}}
+                    </x-filament::button>
+                HTML),
+            )
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
