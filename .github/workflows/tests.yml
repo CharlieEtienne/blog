@@ -17,18 +17,13 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
-      - name: Prepare Environment
-        run: |
-          cp .env.example .env
-          touch database/database.sqlite
-
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Prepare Laravel Application
         run: |
+          cp .env.example .env
           php artisan key:generate
-          php artisan migrate
           npm ci
           npm run build
 

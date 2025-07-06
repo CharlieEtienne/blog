@@ -3,6 +3,7 @@
 namespace App\Enums;
 
 use Rawilk\Settings\Facades\Settings;
+use Illuminate\Support\Facades\Schema;
 
 enum SiteSettings: string
 {
@@ -64,6 +65,9 @@ enum SiteSettings: string
 
     public function get(): mixed
     {
+        if (app()->runningInConsole()){
+            return $this->getDefaultValue();
+        }
         return Settings::get($this->value, $this->getDefaultValue());
     }
 
