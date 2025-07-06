@@ -40,8 +40,10 @@ class AppServiceProvider extends ServiceProvider
                 ->uncompromised();
         });
 
-        FilamentColor::register([
-            'primary' => SiteSettings::PRIMARY_COLOR->get(),
-        ]);
+        $this->app->booted(function () {
+            FilamentColor::register([
+                'primary' => SiteSettings::PRIMARY_COLOR->get(),
+            ]);
+        });
     }
 }
