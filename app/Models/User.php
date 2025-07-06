@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Filament\Panel;
+use Filament\Facades\Filament;
 use App\Support\AuthorizedDomains;
+use Illuminate\Support\Facades\Storage;
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,9 +17,10 @@ use Illuminate\Notifications\Notifiable;
  * @property int id
  * @property string name
  * @property string email
+ * @property string avatar_url
  * @property-read \Illuminate\Database\Eloquent\Collection<\App\Models\Post> posts
  */
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -68,6 +72,18 @@ class User extends Authenticatable implements FilamentUser
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function getFilamentAvatarUrl(): ?string
+    {
+        if($this->avatar_url && Storage::disk('public')->exists($this->avatar_url)){
+            return Storage::disk('public')->url($this->avatar_url);
+        }
+        return app(Filament::getDefaultAvatarProvider())->get($this);
     }
 
 }

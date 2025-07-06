@@ -19,6 +19,18 @@ class PostController extends Controller
     {
         abort_if(! $request->user()?->isAdmin() && ! $post->published_at, 404);
 
-        return view('posts.show', ['post' => $post]);
+        $relatedPosts = Post::query()
+            ->published()
+            ->latest('published_at')
+            ->where('id', '<>', $post->id)
+            ->limit(10)
+            ->get()
+            ->shuffle()
+            ->take(2);
+
+        return view('posts.show', [
+            'post' => $post,
+            'relatedPosts' => $relatedPosts,
+        ]);
     }
 }
