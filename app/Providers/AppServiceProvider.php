@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Enums\SiteSettings;
 use Illuminate\Support\Carbon;
-use Filament\Facades\Filament;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
@@ -41,10 +40,6 @@ class AppServiceProvider extends ServiceProvider
                 ->uncompromised();
         });
 
-        Filament::serving(function () {
-            FilamentColor::register([
-                'primary' => SiteSettings::PRIMARY_COLOR->get(),
-            ]);
-        });
+
     }
 }
