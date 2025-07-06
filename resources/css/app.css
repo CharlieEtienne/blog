@@ -5,7 +5,118 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --breakpoint-*: initial;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1440px;
+
+    --font-heading: var(--font-heading, 'Inter', sans-serif);
+
+    --color-primary-50: var(--color-primary-50);
+    --color-primary-100: var(--color-primary-100);
+    --color-primary-200: var(--color-primary-200);
+    --color-primary-300: var(--color-primary-300);
+    --color-primary-400: var(--color-primary-400);
+    --color-primary-500: var(--color-primary-500);
+    --color-primary-600: var(--color-primary-600);
+    --color-primary-700: var(--color-primary-700);
+    --color-primary-800: var(--color-primary-800);
+    --color-primary-900: var(--color-primary-900);
+    --color-primary-950: var(--color-primary-950);
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    @apply appearance-none;
+}
+
+.prose pre,
+.prose code {
+    color: #24292e !important;
+    background-color: white !important;
+}
+
+.beautiful-content {
+    @apply max-w-none
+    prose
+    prose-a:decoration-1
+    prose-a:decoration-black/30
+    prose-a:font-normal
+    prose-a:underline-offset-4
+    prose-headings:font-medium
+    prose-headings:scroll-mt-4
+    prose-img:shadow-xl
+    prose-img:ring-1
+    prose-img:ring-black/5
+    prose-img:rounded-sm
+    prose-pre:ring-1
+    prose-pre:ring-black/5
+    prose-pre:shadow-md
+    prose-pre:shadow-black/5
+    prose-strong:font-medium
+}
+
+.colored {
+    @apply text-primary-600;
+}
+
+.menu-icon {
+    @apply size-6 text-gray-600 relative cursor-pointer place-self-center;
+
+    .menu-icon__checkbox {
+        -webkit-touch-callout: none;
+        @apply block w-full h-full cursor-pointer z-[2] absolute opacity-0;
+    }
+    div {
+        @apply w-6 m-auto absolute top-0 right-0 left-0 bottom-0 h-3;
+    }
+    span {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-gray-600, #000);
+        border-radius: 1px;
+        transition: all 0.2s cubic-bezier(0.1, 0.82, 0.76, 0.965);
+
+        &:first-of-type {
+            top: 0;
+        }
+        &:last-of-type {
+            bottom: 0;
+        }
+    }
+    &.active,
+    .menu-icon__cheeckbox:checked + div {
+        span {
+            &:first-of-type {
+                transform: rotate(45deg);
+                top: 5px;
+            }
+            &:last-of-type {
+                transform: rotate(-45deg);
+                bottom: 5px;
+            }
+        }
+    }
+
+    &.active:hover span:first-of-type,
+    &.active:hover span:last-of-type,
+    &:hover .menu-icon__cheeckbox:checked + div span:first-of-type,
+    &:hover .menu-icon__cheeckbox:checked + div span:last-of-type {
+        @apply w-6;
+    }
 }

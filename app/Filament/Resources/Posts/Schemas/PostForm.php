@@ -48,6 +48,7 @@ class PostForm
                             ->partiallyRenderAfterStateUpdated(),
 
                         RichEditor::make('body')
+                            ->json()
                             ->hiddenLabel(),
                     ]),
 
@@ -62,6 +63,8 @@ class PostForm
                         Section::make('Post Settings')->schema([
                             FileUpload::make('image')
                                 ->image()
+                                ->disk('public')
+                                ->visibility('public')
                                 ->imageEditor(),
 
                             Select::make('author_id')
