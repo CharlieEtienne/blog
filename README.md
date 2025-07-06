@@ -10,5 +10,4 @@ It's written with:
 - Livewire
 - AlpineJS
 - TailwindCSS
-- DaisyUI
 - Filament
