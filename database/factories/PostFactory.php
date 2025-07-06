@@ -27,7 +27,20 @@ class PostFactory extends Factory
 
         return [
             'title'        => $title,
-            'body'         => fake()->randomHtml(),
+            'body'         => [
+                'type' => 'doc',
+                'content' => [
+                    [
+                        'type' => 'paragraph',
+                        'content' => [
+                            [
+                                'type' => 'text',
+                                'text' => 'Example Text',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'slug'         => $slug,
             'excerpt'      => null,
             'image'        => fake()->image(),
