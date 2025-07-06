@@ -47,6 +47,7 @@
         :root {
             --font-heading: {{ SiteSettings::HEADING_FONT->get() }}, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             --font-sans: {{ SiteSettings::BODY_FONT->get() }}, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            --font-mono: {{ SiteSettings::CODE_FONT->get() }}, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             {{
                 implode("", array_map(fn ($key, $value) => "--color-primary-{$key}: {$value};",
                 array_keys(FilamentColor::getColor('primary')),

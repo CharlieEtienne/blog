@@ -9,6 +9,7 @@ use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Group;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Schemas\Components\Section;
+use App\Filament\CustomBlocks\CodeBlock;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -49,6 +50,9 @@ class PostForm
 
                         RichEditor::make('body')
                             ->json()
+                            ->customBlocks([
+                                CodeBlock::class,
+                            ])
                             ->hiddenLabel(),
                     ]),
 

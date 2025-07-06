@@ -43,12 +43,6 @@ input[type="search"]::-webkit-search-results-decoration {
     @apply appearance-none;
 }
 
-.prose pre,
-.prose code {
-    color: #24292e !important;
-    background-color: white !important;
-}
-
 .beautiful-content {
     @apply max-w-none
     prose
@@ -67,6 +61,10 @@ input[type="search"]::-webkit-search-results-decoration {
     prose-pre:shadow-md
     prose-pre:shadow-black/5
     prose-strong:font-medium
+}
+
+.phiki {
+    @apply rounded-lg p-6 text-base shadow-md shadow-black/5 ring-1 ring-black/5 font-normal;
 }
 
 .colored {

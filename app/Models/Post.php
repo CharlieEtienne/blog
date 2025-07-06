@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\SiteSettings;
 use Illuminate\Support\Facades\Storage;
+use App\Filament\CustomBlocks\CodeBlock;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -75,7 +76,13 @@ class Post extends Model
     public function formattedContent(): Attribute
     {
         return Attribute::make(
-            fn () => $this->body ? RichContentRenderer::make($this->body)->toHtml() : '',
+            fn () => $this->body ?
+                RichContentRenderer::make($this->body)
+                    ->customBlocks([
+                        CodeBlock::class,
+                    ])
+                    ->toHtml()
+                : '',
         )->shouldCache();
     }
 

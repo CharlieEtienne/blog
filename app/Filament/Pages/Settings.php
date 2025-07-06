@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Enums\Font;
+use Phiki\Theme\Theme;
 use App\Enums\SiteSettings;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
@@ -112,6 +113,16 @@ class Settings extends Page implements HasForms
 
                         Select::make(SiteSettings::BODY_FONT->value)
                             ->options(Font::class)
+                            ->searchable(),
+
+                        Select::make(SiteSettings::CODE_FONT->value)
+                            ->options(Font::class)
+                            ->searchable(),
+
+                        Select::make(SiteSettings::CODE_THEME->value)
+                            ->options(collect(Theme::cases())->mapWithKeys(fn(Theme $theme) => [
+                                $theme->value => $theme->name,
+                            ]))
                             ->searchable(),
 
                     ])->columns(1),

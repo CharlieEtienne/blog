@@ -15,6 +15,8 @@ enum SiteSettings: string
     case PRIMARY_COLOR = 'primary_color';
     case HEADING_FONT = 'heading_font';
     case BODY_FONT = 'body_font';
+    case CODE_FONT = 'code_font';
+    case CODE_THEME = 'code_theme';
     case HERO_TITLE = 'hero_title';
     case HERO_SUBTITLE = 'hero_subtitle';
     case HERO_IMAGE = 'hero_image';
@@ -46,6 +48,8 @@ enum SiteSettings: string
             self::PRIMARY_COLOR => '#6366f1',
             self::HEADING_FONT => 'Hanken Grotesk',
             self::BODY_FONT => 'Hanken Grotesk',
+            self::CODE_FONT => 'JetBrains Mono',
+            self::CODE_THEME => 'catppuccin-macchiato',
             self::HERO_TITLE => "Welcome to my |personal| blog",
             self::HERO_SUBTITLE => "A place to share my thoughts",
             self::HERO_IMAGE => null,
