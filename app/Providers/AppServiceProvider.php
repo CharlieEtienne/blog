@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\SiteSettings;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rules\Password;
+use Filament\Support\Facades\FilamentColor;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,5 +39,9 @@ class AppServiceProvider extends ServiceProvider
                 ->numbers()
                 ->uncompromised();
         });
+
+        FilamentColor::register([
+            'primary' => SiteSettings::PRIMARY_COLOR->get(),
+        ]);
     }
 }
