@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Category;
+use App\Support\TipTapFaker;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -27,20 +28,21 @@ class PostFactory extends Factory
 
         return [
             'title'        => $title,
-            'body'         => [
-                'type' => 'doc',
-                'content' => [
-                    [
-                        'type' => 'paragraph',
-                        'content' => [
-                            [
-                                'type' => 'text',
-                                'text' => 'Example Text',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
+            'body'         => TipTapFaker::content(
+                TipTapFaker::h2(),
+                TipTapFaker::paragraph(),
+                TipTapFaker::paragraph(),
+                TipTapFaker::h3(),
+                TipTapFaker::paragraph(),
+                TipTapFaker::h3(),
+                TipTapFaker::paragraph(),
+                TipTapFaker::h2(),
+                TipTapFaker::paragraph(),
+                TipTapFaker::h3(),
+                TipTapFaker::paragraph(),
+                TipTapFaker::h3(),
+                TipTapFaker::paragraph(),
+            ),
             'slug'         => $slug,
             'excerpt'      => null,
             'image'        => fake()->image(),
