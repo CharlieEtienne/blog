@@ -86,6 +86,15 @@ class PaletteGenerator
         return [ $x, $y, $z];
     }
 
+    public static function convertToLinearSpace(mixed $r, mixed $g, mixed $b): array
+    {
+        $r = $r <= 0.04045 ? $r / 12.92 : pow(($r + 0.055) / 1.055, 2.4);
+        $g = $g <= 0.04045 ? $g / 12.92 : pow(($g + 0.055) / 1.055, 2.4);
+        $b = $b <= 0.04045 ? $b / 12.92 : pow(($b + 0.055) / 1.055, 2.4);
+
+        return [$r, $g, $b];
+    }
+
     public static function delta2000(array $rgb1, array $rgb2): float
     {
         [$l1, $a1, $b1] = $rgb1;
@@ -464,15 +473,6 @@ class PaletteGenerator
           ['color' => "slate", 'shade' => '100', 'hex' => "#f1f5f9", 'oklch' => [0.968, 0.007, 247.896], 'lab' => [9030.6212025539, -51.326517436443, -202.27047932117]],
           ['color' => "slate", 'shade' => '50', 'hex' => "#f8fafc", 'oklch' => [0.984, 0.003, 247.858], 'lab' => [9186.332736135, -26.098761819142, -100.66450195788]],
         ];
-    }
-
-    public static function convertToLinearSpace(mixed $r, mixed $g, mixed $b): array
-    {
-        $r = $r <= 0.04045 ? $r / 12.92 : pow(($r + 0.055) / 1.055, 2.4);
-        $g = $g <= 0.04045 ? $g / 12.92 : pow(($g + 0.055) / 1.055, 2.4);
-        $b = $b <= 0.04045 ? $b / 12.92 : pow(($b + 0.055) / 1.055, 2.4);
-
-        return [$r, $g, $b];
     }
 
 }
