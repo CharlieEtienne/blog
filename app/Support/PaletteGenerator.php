@@ -7,7 +7,7 @@ class PaletteGenerator
 
     public static function rgbToOklch(array $rgb): array
     {
-        list ($red, $green, $blue) = $rgb;
+        [$red, $green, $blue] = $rgb;
 
         // Normalize RGB values to between 0 and 1
         $red /= 255;
@@ -52,7 +52,7 @@ class PaletteGenerator
 
     public static function xyzToLab ($xyz): array
     {
-        list ($x, $y, $z) = $xyz;
+        [$x, $y, $z] = $xyz;
 
         $x /= 95.047;
         $y /= 100;
@@ -466,19 +466,13 @@ class PaletteGenerator
         ];
     }
 
-    /**
-     * @param  mixed  $r
-     * @param  mixed  $g
-     * @param  mixed  $b
-     *
-     * @return float[]
-     */
     public static function convertToLinearSpace(mixed $r, mixed $g, mixed $b): array
     {
         $r = $r <= 0.04045 ? $r / 12.92 : pow(($r + 0.055) / 1.055, 2.4);
         $g = $g <= 0.04045 ? $g / 12.92 : pow(($g + 0.055) / 1.055, 2.4);
         $b = $b <= 0.04045 ? $b / 12.92 : pow(($b + 0.055) / 1.055, 2.4);
-        return array($r, $g, $b);
+
+        return [$r, $g, $b];
     }
 
 }
