@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e55d6428ccf6f4c3bb6a6547e87cb5c5",
+    "content-hash": "4d126f04205056386fe4c7dde37f972f",
     "packages": [
         {
             "name": "andreiio/blade-iconoir",
@@ -408,6 +408,53 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "charlieetienne/palette-generator",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CharlieEtienne/palette-generator.git",
+                "reference": "e88c4da243877182d6adfe3ad823d1a13b35da8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CharlieEtienne/palette-generator/zipball/e88c4da243877182d6adfe3ad823d1a13b35da8a",
+                "reference": "e88c4da243877182d6adfe3ad823d1a13b35da8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CharlieEtienne\\PaletteGenerator\\PaletteGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CharlieEtienne\\PaletteGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Charlie Etienne",
+                    "email": "hello@charlieetienne.com"
+                }
+            ],
+            "description": "A PHP library for generating tailwind v4 color palettes from a hexadecimal color",
+            "support": {
+                "issues": "https://github.com/CharlieEtienne/palette-generator/issues",
+                "source": "https://github.com/CharlieEtienne/palette-generator/tree/v1.0"
+            },
+            "time": "2025-07-07T22:08:46+00:00"
         },
         {
             "name": "chillerlan/php-qrcode",

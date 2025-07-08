@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "andreiio/blade-iconoir": "^4.7",
+        "charlieetienne/palette-generator": "^1.0",
         "filament/filament": "^4.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
