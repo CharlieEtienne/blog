@@ -11,6 +11,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rules\Password;
 use Filament\Support\Facades\FilamentColor;
+use CharlieEtienne\PaletteGenerator\PaletteGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,7 +42,14 @@ class AppServiceProvider extends ServiceProvider
         });
 
         FilamentColor::register([
-            'primary' => SiteSettings::PRIMARY_COLOR->get(),
+            'primary' => self::cachedGeneratedPalette(
+                SiteSettings::PRIMARY_COLOR->get()
+            ),
         ]);
+    }
+
+    public function cachedGeneratedPalette(string $color): array
+    {
+        return cache()->rememberForever("palette_{$color}", fn () => PaletteGenerator::generatePalette($color));
     }
 }
