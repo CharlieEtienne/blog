@@ -50,6 +50,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function cachedGeneratedPalette(string $color): array
     {
-        return cache()->rememberForever("palette_{$color}", fn () => PaletteGenerator::generatePalette($color));
+        return cache()->rememberForever("primary_palette_generated", fn () => PaletteGenerator::generatePalette($color));
     }
 }

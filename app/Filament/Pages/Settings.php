@@ -238,6 +238,13 @@ class Settings extends Page implements HasForms
     {
         $state = $this->form->getState();
 
+        // Invalidate palette caches if primary color changed
+        $oldPrimaryColor = SiteSettings::PRIMARY_COLOR->get();
+        $newPrimaryColor = $state[SiteSettings::PRIMARY_COLOR->value] ?? null;
+        if ($oldPrimaryColor !== $newPrimaryColor) {
+            cache()->forget("primary_palette_generated");
+        }
+
         foreach (SiteSettings::cases() as $setting) {
             $setting->set($state[ $setting->value ] ?? null);
         }
