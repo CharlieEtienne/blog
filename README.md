@@ -30,7 +30,7 @@ It's fully open source.
 ### Front end (TALL Stack), with:
   - [x] Homepage
   - [x] About Section
-  - [x] Blog
+  - [x] Blog posts with code blocks, table of contents, and more
   - [x] Categories
   - [x] Tags
 
@@ -81,7 +81,7 @@ composer install
 
 ### 3. Run the installer
 
-You will be prompt for several configuration options.
+You will be prompted for several configuration options.
 
 ```bash
 php artisan blog:install
@@ -103,4 +103,6 @@ Contributions are welcome!
 
 ## Credits
 
-Some parts of this blog are heavily inspired by https://github.com/benjamincrozat/blog-v5
+Some parts of this blog are heavily inspired by https://github.com/benjamincrozat/blog-v5.
+
+Also, big thanks to @awcodes for his help on TipTap plugins and table of contents!
