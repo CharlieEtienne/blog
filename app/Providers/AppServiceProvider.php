@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         FilamentColor::register([
-            'primary' => self::cachedGeneratedPalette(
+            'primary' => $this->cachedGeneratedPalette(
                 SiteSettings::PRIMARY_COLOR->get()
             ),
         ]);
@@ -50,6 +50,11 @@ class AppServiceProvider extends ServiceProvider
 
     public function cachedGeneratedPalette(string $color): array
     {
-        return cache()->rememberForever("primary_palette_generated", fn () => PaletteGenerator::generatePalette($color));
+        try {
+            return cache()->rememberForever("primary_palette_generated", fn () => PaletteGenerator::generatePalette($color));
+        } catch (\Exception $e) {
+            // Bypass cache if the database is not available (e.g., during CI or tests)
+            return PaletteGenerator::generatePalette($color);
+        }
     }
 }
