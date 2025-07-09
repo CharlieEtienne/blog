@@ -66,10 +66,6 @@ class CodeBlock extends RichContentCustomBlock
         );
     }
 
-    /**
-     * @param  array<string, mixed>  $config
-     * @param  array<string, mixed>  $data
-     */
     public static function toHtml(array $config, array $data): string
     {
         return self::codeToHtml(
@@ -84,7 +80,7 @@ class CodeBlock extends RichContentCustomBlock
         return filled(SiteSettings::CODE_THEME->get()) ? Theme::tryFrom(SiteSettings::CODE_THEME->get()) : Theme::CatppuccinMacchiato;
     }
 
-    public static function codeToHtml($code, Grammar $grammar, Theme $theme): string
+    public static function codeToHtml(string $code, Grammar $grammar, Theme $theme): string
     {
         $phiki = new Phiki();
 
