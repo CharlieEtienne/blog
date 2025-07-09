@@ -93,7 +93,7 @@ class Post extends Model
     public function textContent(): Attribute
     {
         return Attribute::make(
-            fn () => strip_tags($this->formattedContent)
+            fn () => $this->body ? RichContentRenderer::make($this->body)->toText() : '',
         )->shouldCache();
     }
 

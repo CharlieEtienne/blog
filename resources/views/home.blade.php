@@ -27,15 +27,17 @@
             {{ SiteSettings::HERO_SUBTITLE->get() }}
         </div>
 
-        <div class="flex gap-2 justify-center items-center mt-7 text-center md:mt-11">
-            <x-btn size="md" href="#about">
-                {{ __('About') }}
-            </x-btn>
+        @if(filled(SiteSettings::ABOUT_TEXT->get()) && SiteSettings::ABOUT_TEXT->get() !== "<p></p>")
+            <div class="flex gap-2 justify-center items-center mt-7 text-center md:mt-11">
+                <x-btn size="md" href="#about">
+                    {{ __('About') }}
+                </x-btn>
 
-            <x-btn primary size="md" href="#latest">
-                {{ __('Blog') }}
-            </x-btn>
-        </div>
+                <x-btn primary size="md" href="#latest">
+                    {{ __('Blog') }}
+                </x-btn>
+            </div>
+        @endif
 
     </div>
 
@@ -57,7 +59,7 @@
         </x-section>
     @endif
 
-    @if(filled(SiteSettings::ABOUT_TEXT->get()))
+    @if(filled(SiteSettings::ABOUT_TEXT->get()) && SiteSettings::ABOUT_TEXT->get() !== "<p></p>")
         <x-section
             title="{{ SiteSettings::ABOUT_TITLE->get() }}"
             id="about"
