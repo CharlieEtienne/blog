@@ -114,7 +114,7 @@
 
             @if ($post->comments_count)
                 <div class="mt-24">
-                     <livewire:comments :post-id="$post->id" />
+                    <livewire:comments :post-id="$post->id" />
                 </div>
             @endif
         </div>
@@ -122,21 +122,25 @@
     </div>
 
     @if ($post->published_at)
+        @php
+            $structuredData = [
+                '@context' => 'https://schema.org',
+                '@type' => 'Article',
+                'author' => [
+                    '@type' => 'Person',
+                    'name' => $post->author->name,
+                    'url' => route('home') . '#about',
+                ],
+                'headline' => $post->title,
+                'description' => $post->description,
+                'image' => $post->image_url,
+                'datePublished' => $post->published_at->toIso8601String(),
+                'dateModified' => ($post->updated_at ?? $post->published_at)->toIso8601String(),
+            ];
+        @endphp
+
         <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "Article",
-                "author": {
-                    "@type": "Person",
-                    "name": "{{ $post->author->name }}",
-                    "url": "{{ route('home') }}#about"
-                },
-                "headline": "{{ $post->title }}",
-                "description": "{{ $post->description }}",
-                "image": "{{ $post->image }}",
-                "datePublished": "{{ $post->published_at->toIso8601String() }}",
-                "dateModified": "{{ $post->updated_at?->toIso8601String() ?? $post->published_at->toIso8601String() }}"
-            }
+            {!! json_encode($structuredData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
     @endif
 </x-app>
