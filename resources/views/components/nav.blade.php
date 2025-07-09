@@ -11,7 +11,7 @@
         <a
             wire:navigate
             href="{{ route('home') }}"
-            class="transition-colors hover:text-primary-600 @if(request()->routeIs('home')) text-primary-600 @endif }}"
+            class="transition-colors hover:text-primary-600 dark:hover:text-primary-500 @if(request()->routeIs('home')) text-primary-600 dark:text-primary-500 @endif }}"
         >
             {!! Icons::getHeroicon(name: 'home', isOutlined: !request()->routeIs('home'), class: 'mx-auto size-6') !!}
             Home
@@ -20,7 +20,7 @@
         <a
             wire:navigate
             href="{{ route('posts.index') }}"
-            class="transition-colors hover:text-primary-600 @if(request()->routeIs('posts.index')) text-primary-600 @endif }}"
+            class="transition-colors hover:text-primary-600 dark:hover:text-primary-500 @if(request()->routeIs('posts.index')) text-primary-600 dark:text-primary-500 @endif }}"
         >
             {!! Icons::getHeroicon(name: 'newspaper', isOutlined: !request()->routeIs('posts.index'), class: 'mx-auto size-6') !!}
             Blog
@@ -28,7 +28,7 @@
 
         <x-dropdown>
             <x-slot:btn
-                class="transition-colors hover:text-primary-600 cursor-pointer"
+                class="transition-colors hover:text-primary-600 dark:hover:text-primary-500 cursor-pointer"
             >
                 <div class="menu-icon" x-bind:class="{ 'active': open }">
                     <input class="menu-icon__checkbox" type="checkbox" name="more"/>

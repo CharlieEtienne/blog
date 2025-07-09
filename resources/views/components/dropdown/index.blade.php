@@ -11,7 +11,7 @@
         {{
             $items
                 ->attributes
-                ->class('z-10 py-2 text-base bg-white/85 backdrop-blur-md rounded-lg shadow-lg ring-1 ring-black/10 min-w-[240px]')
+                ->class('z-10 py-2 text-base bg-white/85 dark:bg-gray-800/75 backdrop-blur-md rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 min-w-[240px]')
                 ->merge([
                     'x-anchor.bottom' => '$el.previousElementSibling',
                     'x-cloak' => true,

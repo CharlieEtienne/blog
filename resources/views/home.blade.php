@@ -19,11 +19,11 @@
 
     <div class="container text-center">
 
-        <div class="font-heading font-medium tracking-tight text-black text-3xl/none md:text-5xl lg:text-6xl text-balance">
+        <div class="font-heading font-medium tracking-tight text-black dark:text-white text-3xl/none md:text-5xl lg:text-6xl text-balance">
             {!! ColoredText::get(SiteSettings::HERO_TITLE->get()) !!}
         </div>
 
-        <div class="mt-5 tracking-tight text-black/75 text-lg/tight sm:text-xl/tight md:text-2xl/tight md:mt-8">
+        <div class="mt-5 tracking-tight text-black/75 dark:text-white/75 text-lg/tight sm:text-xl/tight md:text-2xl/tight md:mt-8">
             {{ SiteSettings::HERO_SUBTITLE->get() }}
         </div>
 

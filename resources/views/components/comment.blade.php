@@ -6,7 +6,7 @@
         <img
             src="{{ $comment->author->getFilamentAvatarUrl() }}"
             alt="{{ $comment->author->name }}"
-            class="flex-none mt-1 rounded-full shadow-sm shadow-black/5 ring-1 ring-black/10 size-7 md:size-8"
+            class="flex-none mt-1 rounded-full shadow-sm shadow-black/5 dark:shadow-white/5 ring-1 ring-black/10 dark:ring-white/10 size-7 md:size-8"
         />
 
         <div class="grow">
@@ -20,7 +20,7 @@
                 </span>
             </div>
 
-            <div class="beautiful-content px-4 py-3 mt-2 bg-gray-100 rounded-lg">
+            <div class="beautiful-content px-4 py-3 mt-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
                 {!! $comment->content !!}
             </div>
         </div>

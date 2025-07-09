@@ -12,13 +12,13 @@
                          class="object-cover w-full rounded-xl ring-1 shadow-xl ring-black/5 aspect-video"/>
                 @endif
 
-                <h1 class="mt-12 font-heading font-medium tracking-tight text-center text-black text-balance md:mt-16 text-3xl/none sm:text-4xl/none lg:text-5xl/none">
+                <h1 class="mt-12 font-heading font-medium tracking-tight text-center text-black dark:text-white text-balance md:mt-16 text-3xl/none sm:text-4xl/none lg:text-5xl/none">
                     {{ $post->title }}
                 </h1>
 
                 <div class="mt-12 md:mt-16">
                     <div class="grid grid-cols-2 gap-4 text-sm leading-tight md:grid-cols-4">
-                        <div class="flex-1 p-3 text-center bg-gray-50 rounded-lg">
+                        <div class="flex-1 p-3 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
                             <x-heroicon-o-calendar class="mx-auto mb-2 opacity-75 size-6"/>
 
                             @if($post->updated_at) {{ __('Modified') }}
@@ -32,7 +32,7 @@
                         </div>
 
                         <div
-                            class="flex-1 p-3 text-center bg-gray-50 rounded-lg">
+                            class="flex-1 p-3 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
                             <img src="{{ $post->author->getFilamentAvatarUrl() }}" class="mx-auto mb-2 rounded-full size-6"/>
                             {{ __('Written by') }}<br/>
                             {{ $post->author->name }}
@@ -40,8 +40,8 @@
 
                         <a href="#comments" class="group">
                             <div @class([
-                                'flex-1 p-3 text-center transition-colors rounded-lg bg-gray-50 hover:bg-primary-50 group-hover:text-primary-900',
-                                'text-primary-600' => $post->comments_count > 0,
+                                'flex-1 p-3 text-center transition-colors rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-primary-50 dark:hover:bg-primary-950 group-hover:text-primary-900 dark:group-hover:text-primary-100',
+                                'text-primary-600 dark:text-primary-500' => $post->comments_count > 0,
                             ])>
                                 <x-heroicon-o-chat-bubble-oval-left-ellipsis class="mx-auto mb-2 opacity-75 size-6"/>
                                 {{ $post->comments_count }}<br/>
@@ -49,7 +49,7 @@
                             </div>
                         </a>
 
-                        <div class="flex-1 p-3 text-center bg-gray-50 rounded-lg">
+                        <div class="flex-1 p-3 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
                             <x-heroicon-o-clock class="mx-auto mb-2 opacity-75 size-6" />
                             {{ $post->read_time }}<br/>
                             {{ trans_choice('minute|minutes', $post->read_time) }}
@@ -59,7 +59,7 @@
                     @if (! empty($post->categories))
                         <div class="flex gap-2 mt-6 place-self-center">
                             @foreach ($post->categories->take(2) as $category)
-                                <a wire:navigate href="{{ route('categories.show', $category->slug) }}" class="px-2 py-1 text-xs font-medium uppercase rounded-sm border border-gray-200 transition-colors hover:border-primary-300 hover:text-primary-600">
+                                <a wire:navigate href="{{ route('categories.show', $category->slug) }}" class="px-2 py-1 text-xs font-medium uppercase rounded-sm border border-gray-200 dark:border-gray-700 transition-colors hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400">
                                     {{ $category->name }}
                                 </a>
                             @endforeach
@@ -69,7 +69,7 @@
                     @if (! empty($post->tags))
                         <div class="flex gap-2 mt-6 place-self-center">
                             @foreach ($post->tags->take(10) as $tag)
-                                <a wire:navigate href="{{ route('tags.show', $tag->slug) }}" class="px-2 py-1 text-sm rounded-sm bg-gray-50 transition-colors hover:bg-primary-100 hover:text-primary-600">
+                                <a wire:navigate href="{{ route('tags.show', $tag->slug) }}" class="px-2 py-1 text-sm rounded-sm bg-gray-50 dark:bg-gray-800 transition-colors hover:bg-primary-100 hover:text-primary-600 dark:hover:bg-primary-950 dark:hover:text-primary-300">
                                     #{{ $tag->name }}
                                 </a>
                             @endforeach
@@ -84,7 +84,7 @@
                         <div class="mt-12">
                             {!! $tableOfContents->render() !!}
                         </div>
-                        <hr class="mt-12 text-gray-100"/>
+                        <hr class="mt-12 text-gray-100 dark:text-gray-800"/>
                     @endif
 
                     <div class="beautiful-content mt-8">
@@ -92,9 +92,9 @@
                     </div>
 
                     @if (! empty($relatedPosts))
-                        <hr class="mt-12 text-gray-100"/>
+                        <hr class="mt-12 text-gray-100 dark:text-gray-800"/>
 
-                        <h3 class="text-xl font-medium text-gray-900 mt-8 mb-2">
+                        <h3 class="text-xl font-medium text-gray-900 dark:text-gray-200 mt-8 mb-2">
                             {{ __('Continue reading') }}
                         </h3>
                         <p class="tracking-tight text-gray-500 text-lg/tight mb-8">

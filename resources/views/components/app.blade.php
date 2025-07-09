@@ -66,7 +66,7 @@
 
 </head>
 
-<body {{ $attributes->class('font-light text-gray-600') }}>
+<body {{ $attributes->class('font-light text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-900') }}>
     <div class="flex flex-col min-h-screen">
 
         <header class="container mt-4 xl:max-w-(--breakpoint-lg)">

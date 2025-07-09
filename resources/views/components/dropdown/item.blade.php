@@ -1,6 +1,6 @@
 @props([
     'classes' => $attributes->class([
-        'flex items-center w-full gap-2 px-4 py-2 transition-colors hover:bg-primary-600/85 hover:text-white'
+        'flex items-center w-full gap-2 px-4 py-2 transition-colors hover:bg-primary-600/85 dark:hover:bg-primary-500/85 hover:text-white'
     ])
 ])
 
