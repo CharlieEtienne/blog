@@ -79,7 +79,7 @@ class CodeBlock extends RichContentCustomBlock
         );
     }
 
-    public static function getCodeTheme()
+    public static function getCodeTheme(): ?Theme
     {
         return filled(SiteSettings::CODE_THEME->get()) ? Theme::tryFrom(SiteSettings::CODE_THEME->get()) : Theme::CatppuccinMacchiato;
     }
