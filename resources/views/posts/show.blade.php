@@ -32,7 +32,7 @@
                         </div>
 
                         <div
-                            class="flex-1 p-3 text-center bg-gray-50 rounded-lg transition-colors hover:bg-primary-50 group-hover:text-primary-900">
+                            class="flex-1 p-3 text-center bg-gray-50 rounded-lg">
                             <img src="{{ $post->author->getFilamentAvatarUrl() }}" class="mx-auto mb-2 rounded-full size-6"/>
                             {{ __('Written by') }}<br/>
                             {{ $post->author->name }}
