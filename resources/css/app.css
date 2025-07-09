@@ -63,6 +63,10 @@ input[type="search"]::-webkit-search-results-decoration {
     prose-strong:font-medium
 }
 
+.toc-link {
+    @apply text-gray-400 no-underline hover:text-gray-600 mr-1;
+}
+
 .phiki {
     @apply rounded-lg p-6 text-base shadow-md shadow-black/5 ring-1 ring-black/5 font-normal;
 }

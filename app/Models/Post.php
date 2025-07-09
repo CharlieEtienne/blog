@@ -6,6 +6,7 @@ use App\Enums\SiteSettings;
 use Illuminate\Support\Facades\Storage;
 use App\Filament\CustomBlocks\CodeBlock;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\RichEditorPlugins\IdPlugin;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -81,7 +82,10 @@ class Post extends Model
                     ->customBlocks([
                         CodeBlock::class,
                     ])
-                    ->toHtml()
+                    ->plugins([
+                        IdPlugin::make(),
+                    ])
+                    ->toHtmlWithHeadingLinks()
                 : '',
         )->shouldCache();
     }

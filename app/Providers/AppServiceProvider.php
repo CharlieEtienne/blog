@@ -4,14 +4,18 @@ namespace App\Providers;
 
 use App\Enums\SiteSettings;
 use Illuminate\Support\Carbon;
+use Filament\Support\Assets\Js;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use App\Mixins\RichContentRendererMixin;
 use Illuminate\Validation\Rules\Password;
 use Filament\Support\Facades\FilamentColor;
+use Filament\Support\Facades\FilamentAsset;
 use CharlieEtienne\PaletteGenerator\PaletteGenerator;
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
+     *
+     * @throws \ReflectionException
      */
     public function boot(): void
     {
@@ -46,6 +52,12 @@ class AppServiceProvider extends ServiceProvider
                 SiteSettings::PRIMARY_COLOR->get()
             ),
         ]);
+
+        FilamentAsset::register([
+            Js::make('rich-content-plugins/IdExtension', __DIR__ . '/../../resources/js/dist/filament/rich-content-plugins/IdExtension.js')->loadedOnRequest(),
+        ]);
+
+        RichContentRenderer::mixin(new RichContentRendererMixin());
     }
 
     public function cachedGeneratedPalette(string $color): array
