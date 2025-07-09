@@ -46,17 +46,11 @@ class CodeBlock extends RichContentCustomBlock
             ]);
     }
 
-    /**
-     * @param  array<string, mixed>  $config
-     */
     public static function getPreviewLabel(array $config): string
     {
         return "{$config['language']} code block";
     }
 
-    /**
-     * @param  array<string, mixed>  $config
-     */
     public static function toPreviewHtml(array $config): string
     {
         return self::codeToHtml(
