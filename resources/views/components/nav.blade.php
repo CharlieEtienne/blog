@@ -1,5 +1,6 @@
 @php
     use App\Support\Icons;
+    use App\Enums\MainPages;
     use App\Enums\SiteSettings;
 @endphp
 
@@ -8,23 +9,36 @@
     <x-logo/>
 
     <div class="menu flex items-center gap-6 md:gap-8 font-normal text-sm">
-        <a
-            wire:navigate
-            href="{{ route('home') }}"
-            class="transition-colors hover:text-primary-600 dark:hover:text-primary-500 @if(request()->routeIs('home')) text-primary-600 dark:text-primary-500 @endif }}"
-        >
-            {!! Icons::getHeroicon(name: 'home', isOutlined: !request()->routeIs('home'), class: 'mx-auto size-6') !!}
-            Home
-        </a>
 
-        <a
-            wire:navigate
-            href="{{ route('posts.index') }}"
-            class="transition-colors hover:text-primary-600 dark:hover:text-primary-500 @if(request()->routeIs('posts.index')) text-primary-600 dark:text-primary-500 @endif }}"
-        >
-            {!! Icons::getHeroicon(name: 'newspaper', isOutlined: !request()->routeIs('posts.index'), class: 'mx-auto size-6') !!}
-            Blog
-        </a>
+        @foreach(SiteSettings::MAIN_MENU->get() ?? [] as $menuItem)
+            @php
+                if(filled(data_get($menuItem, 'page')) && data_get($menuItem, 'page') !== 'custom'){
+                    $url = url(data_get(SiteSettings::PERMALINKS->get(), data_get($menuItem, 'page')));
+                    $name = MainPages::tryFrom(data_get($menuItem, 'page'))->getTitle();
+                }
+                else{
+                    $url = url(data_get($menuItem, 'url'));
+                    $name = data_get($menuItem, 'name');
+                }
+            @endphp
+
+            <a
+                href="{{ $url }}"
+                target="{{ data_get($menuItem, 'open_in_new_tab') ? '_blank' : '' }}"
+                @if(!data_get($menuItem, 'open_in_new_tab') && !str_contains($url,'#')) wire:navigate.hover @endif
+                @class([
+                    'transition-colors hover:text-primary-600 dark:hover:text-primary-500',
+                    'text-primary-600 dark:text-primary-500' => request()->url() === $url
+                ])
+            >
+                {!! Icons::getHeroicon(
+                    name: str(data_get($menuItem, 'icon'))->remove("o-"),
+                    isOutlined: request()->url() !== $url,
+                    class: 'mx-auto size-6'
+                ) !!}
+                {{ $name }}
+            </a>
+        @endforeach
 
         <x-dropdown>
             <x-slot:btn
@@ -33,60 +47,39 @@
                 <div class="menu-icon" x-bind:class="{ 'active': open }">
                     <input class="menu-icon__checkbox" type="checkbox" name="more"/>
                     <div>
-                        <span></span>
-                        <span></span>
+                        <span></span> <span></span>
                     </div>
                 </div>
                 {{ __('More') }}
             </x-slot>
 
             <x-slot:items class="mt-4">
+                @foreach(SiteSettings::MAIN_MENU_MORE->get() ?? [] as $dropdownItem)
 
-                <x-dropdown.item
-                    href="{{ route('home') }}#about"
-                >
-                    <x-heroicon-o-question-mark-circle class="size-4"/>
-                    About
-                </x-dropdown.item>
-
-                <x-dropdown.item
-                    href="{{ blank(SiteSettings::CONTACT_EMAIL->get()) ? '#' : 'mailto:' . SiteSettings::CONTACT_EMAIL->get() }}"
-                >
-                    <x-heroicon-o-envelope class="size-4"/>
-                    Contact me
-                </x-dropdown.item>
-
-                <x-dropdown.divider>
-                    Code and free tools
-                </x-dropdown.divider>
-
-                <x-dropdown.item
-                    href="https://github.com/charlieetienne/charlieetienne.com"
-                    target="_blank"
-                >
-                    <x-iconoir-git-fork class="size-4"/>
-                    Source code
-                </x-dropdown.item>
-
-                <x-dropdown.divider>
-                    Follow me
-                </x-dropdown.divider>
-
-                <x-dropdown.item
-                    href="https://github.com/charlieetienne"
-                    target="_blank"
-                >
-                    <x-iconoir-github class="size-4"/>
-                    GitHub
-                </x-dropdown.item>
-
-                <x-dropdown.item
-                    href="https://x.com/charlieetienne"
-                    target="_blank"
-                >
-                    <x-iconoir-x class="size-4"/>
-                    X
-                </x-dropdown.item>
+                    @if(data_get($dropdownItem, 'type') === 'divider')
+                        <x-dropdown.divider>
+                            {{ data_get($dropdownItem, 'data.label') }}
+                        </x-dropdown.divider>
+                    @else
+                        @php
+                            if(filled(data_get($dropdownItem, 'data.page')) && data_get($dropdownItem, 'data.page') !== 'custom'){
+                                $url = url(data_get(SiteSettings::PERMALINKS->get(), data_get($dropdownItem, 'data.page')));
+                                $name = MainPages::tryFrom(data_get($dropdownItem, 'data.page'))->getTitle();
+                            }
+                            else{
+                                $url = url(data_get($dropdownItem, 'data.url'));
+                                $name = data_get($dropdownItem, 'data.name');
+                            }
+                        @endphp
+                        <x-dropdown.item
+                             href="{{ $url }}"
+                            target="{{ data_get($dropdownItem, 'data.open_in_new_tab') ? '_blank' : '' }}"
+                        >
+                            {!! svg(data_get($dropdownItem, 'data.icon'), 'size-4')->toHtml() !!}
+                            {{ $name }}
+                        </x-dropdown.item>
+                    @endif
+                @endforeach
             </x-slot>
         </x-dropdown>
     </div>

@@ -3,7 +3,6 @@
 namespace App\Enums;
 
 use Rawilk\Settings\Facades\Settings;
-use Illuminate\Support\Facades\Schema;
 
 enum SiteSettings: string
 {
@@ -31,6 +30,10 @@ enum SiteSettings: string
     case CONTACT_EMAIL = 'contact_email';
     case FOOTER_TEXT = 'footer_text';
     case COPYRIGHT_TEXT = 'copyright_text';
+    case MAIN_MENU = 'main_menu';
+    case MAIN_MENU_MORE = 'main_menu_more';
+    case FOOTER_MENU = 'footer_menu';
+    case PERMALINKS = 'permalinks';
 
     /**
      * Get the default value for the setting
@@ -64,6 +67,113 @@ enum SiteSettings: string
             self::CONTACT_EMAIL => '',
             self::FOOTER_TEXT => "Made with ❤️ by me",
             self::COPYRIGHT_TEXT => "©{year}",
+            self::MAIN_MENU => [
+                [
+                    "icon" => "o-home",
+                    "name" => "Home",
+                    "url" => "/",
+                    "open_in_new_tab" => false,
+                    "page" => "home",
+                ],
+                [
+                    "icon" => "o-newspaper",
+                    "name" => "Blog",
+                    "url" => "/blog",
+                    "open_in_new_tab" => false,
+                    "page" => "blog",
+                ],
+            ],
+            self::MAIN_MENU_MORE => [
+                [
+                    "type" => "item",
+                    "data" => [
+                        "icon" => "iconoir-chat-bubble-question",
+                        "page" => "custom",
+                        "name" => "About",
+                        "url" => "/#about",
+                        "open_in_new_tab" => false,
+                    ],
+                ],
+                [
+                    "type" => "item",
+                    "data" => [
+                        "icon" => "iconoir-mail-out",
+                        "page" => "custom",
+                        "name" => "Contact",
+                        "url" => "mailto:hello@example.com",
+                        "open_in_new_tab" => false,
+                    ],
+                ],
+                [
+                    "type" => "divider",
+                    "data" => [
+                        "label" => "Source Code",
+                    ],
+                ],
+                [
+                    "type" => "item",
+                    "data" => [
+                        "icon" => "iconoir-git-fork",
+                        "page" => "custom",
+                        "name" => "Source code",
+                        "url" => "https://github.com/charlieetienne/blog",
+                        "open_in_new_tab" => true,
+                    ],
+                ],
+                [
+                    "type" => "divider",
+                    "data" => [
+                        "label" => "Follow me",
+                    ],
+                ],
+                [
+                    "type" => "item",
+                    "data" => [
+                        "icon" => "iconoir-github",
+                        "page" => "custom",
+                        "name" => "GitHub",
+                        "url" => "https://github.com/charlieetienne",
+                        "open_in_new_tab" => true,
+                    ],
+                ],
+                [
+                    "type" => "item",
+                    "data" => [
+                        "icon" => "iconoir-x",
+                        "page" => "custom",
+                        "name" => "X",
+                        "url" => "https://x.com/charlieetienne",
+                        "open_in_new_tab" => true,
+                    ],
+                ],
+            ],
+            self::FOOTER_MENU => [
+                [
+                    "name" => "Home",
+                    "url" => "/",
+                    "open_in_new_tab" => false,
+                    "page" => "home",
+                ],
+                [
+                    "name" => "Blog",
+                    "url" => "/blog",
+                    "open_in_new_tab" => false,
+                    "page" => "blog",
+                ],
+                [
+                    "name" => "About",
+                    "url" => "/#about",
+                    "open_in_new_tab" => false,
+                    "page" => "custom",
+                ],
+                [
+                    "name" => "Contact",
+                    "url" => "mailto:" . SiteSettings::CONTACT_EMAIL->get(),
+                    "open_in_new_tab" => false,
+                    "page" => "custom",
+                ],
+            ],
+            self::PERMALINKS => collect(MainPages::cases())->mapWithKeys(fn(MainPages $page) => [$page->value => $page->getDefaultSlug()])->toArray(),
         };
     }
 

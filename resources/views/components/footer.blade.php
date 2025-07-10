@@ -1,4 +1,5 @@
 @php
+    use App\Enums\MainPages;
     use App\Enums\SiteSettings;
 @endphp
 
@@ -7,10 +8,26 @@
         <div class="flex flex-row justify-center items-center w-full">
             <div>
                 <nav class="grid sm:auto-cols-[minmax(50px,100px)] sm:grid-flow-col gap-y-2 gap-x-6 place-items-center mx-auto w-full">
-                    <a wire:navigate href="{{ route('home') }}">Home</a>
-                    <a wire:navigate href="{{ route('posts.index') }}">Blog</a>
-                    <a href="{{ route('home') }}#about">About</a>
-                    <a href="{{ blank(SiteSettings::CONTACT_EMAIL->get()) ? '#' : 'mailto:' . SiteSettings::CONTACT_EMAIL->get() }}">Contact</a>
+                    @foreach(SiteSettings::FOOTER_MENU->get() ?? [] as $footerMenuItem)
+                        @php
+                            if(filled(data_get($footerMenuItem, 'page')) && data_get($footerMenuItem, 'page') !== 'custom'){
+                                $url = url(data_get(SiteSettings::PERMALINKS->get(), data_get($footerMenuItem, 'page')));
+                                $name = MainPages::tryFrom(data_get($footerMenuItem, 'page'))->getTitle();
+                            }
+                            else{
+                                $url = url(data_get($footerMenuItem, 'url'));
+                                $name = data_get($footerMenuItem, 'name');
+                            }
+                        @endphp
+
+                        <a
+                            href="{{ $url }}"
+                            target="{{ data_get($footerMenuItem, 'open_in_new_tab') ? '_blank' : '' }}"
+                            @if(!data_get($footerMenuItem, 'open_in_new_tab') && !str_contains($url,'#')) wire:navigate.hover @endif
+                        >
+                            {{ $name }}
+                        </a>
+                    @endforeach
                 </nav>
             </div>
         </div>
