@@ -20,11 +20,11 @@ It's fully open source.
   - [x] Blog posts
   - [x] Categories
   - [x] Tags
+  - [x] Menu Builder
   - [ ] Comments
   - [ ] Multilingual
   - [ ] CMS Pages
   - [ ] Portfolio
-  - [ ] Menu Builder
   - [ ] Analytics with panphp/pan
 
 ### Front end (TALL Stack), with:
