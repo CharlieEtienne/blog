@@ -30,9 +30,10 @@ It's fully open source.
 ### Front end (TALL Stack), with:
   - [x] Homepage
   - [x] About Section
-  - [x] Blog posts with code blocks, table of contents, and more
+  - [x] Blog posts with code blocks, table of contents and more
   - [x] Categories
   - [x] Tags
+  - [x] A modern and beautiful theme with dark mode
 
 ### You'll be able to configure a lot of options from the Settings page:
   - [x] Post default image
