@@ -50,6 +50,28 @@ class PostForm
 
                         RichEditor::make('body')
                             ->json()
+                            ->toolbarButtons([
+                                ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
+                                ['h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
+                                ['blockquote', 'code', 'codeBlock', 'bulletList', 'orderedList'],
+                                ['table', 'attachFiles', 'customBlocks'], // The `customBlocks` and `mergeTags` tools are also added here if those features are used.
+                                ['undo', 'redo'],
+                            ])
+                            ->floatingToolbars([
+                                'paragraph' => [
+                                    'bold', 'italic', 'underline', 'strike', 'code', 'h2', 'h3', 'link'
+                                ],
+                                'heading' => [
+                                    'h2', 'h3',
+                                ],
+                                'table' => [
+                                    'tableAddColumnBefore', 'tableAddColumnAfter', 'tableDeleteColumn',
+                                    'tableAddRowBefore', 'tableAddRowAfter', 'tableDeleteRow',
+                                    'tableMergeCells', 'tableSplitCell',
+                                    'tableToggleHeaderRow',
+                                    'tableDelete',
+                                ],
+                            ])
                             ->customBlocks([
                                 CodeBlock::class,
                             ])

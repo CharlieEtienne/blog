@@ -62,6 +62,17 @@ input[type="search"]::-webkit-search-results-decoration {
     prose-pre:shadow-md
     prose-pre:shadow-black/5
     prose-strong:font-medium
+    prose-code:font-mono
+    prose-code:rounded-sm
+    prose-code:px-1
+    prose-code:py-0.5
+    prose-code:font-normal
+    prose-code:before:content-['']
+    prose-code:after:content-['']
+    prose-code:bg-primary-100
+    prose-code:text-primary-600
+    dark:prose-code:bg-white/20
+    dark:prose-code:text-primary-100
 }
 
 .toc-link {
