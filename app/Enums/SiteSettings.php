@@ -12,6 +12,7 @@ enum SiteSettings: string
     case SITE_NAME = 'site_name';
     case DISPLAY_SITE_NAME = 'display_site_name';
     case PRIMARY_COLOR = 'primary_color';
+    case NEUTRAL_COLOR = 'neutral_color';
     case HEADING_FONT = 'heading_font';
     case BODY_FONT = 'body_font';
     case CODE_FONT = 'code_font';
@@ -49,6 +50,7 @@ enum SiteSettings: string
             self::SITE_NAME => config('app.name'),
             self::DISPLAY_SITE_NAME => true,
             self::PRIMARY_COLOR => '#6366f1',
+            self::NEUTRAL_COLOR => 'neutral',
             self::HEADING_FONT => 'Hanken Grotesk',
             self::BODY_FONT => 'Hanken Grotesk',
             self::CODE_FONT => 'JetBrains Mono',

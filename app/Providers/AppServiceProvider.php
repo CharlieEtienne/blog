@@ -6,6 +6,7 @@ use App\Enums\SiteSettings;
 use Illuminate\Support\Carbon;
 use Filament\Support\Assets\Js;
 use Illuminate\Support\Facades\DB;
+use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -51,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
             'primary' => $this->cachedGeneratedPalette(
                 SiteSettings::PRIMARY_COLOR->get()
             ),
+            'gray' => Color::{ucfirst(SiteSettings::NEUTRAL_COLOR->get())},
         ]);
 
         FilamentAsset::register([

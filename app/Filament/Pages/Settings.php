@@ -9,6 +9,7 @@ use App\Enums\MainPages;
 use App\Enums\SiteSettings;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
+use Filament\Support\Colors\Color;
 use Filament\Support\Icons\Heroicon;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Select;
@@ -24,6 +25,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\ColorPicker;
+use Awcodes\Palette\Forms\Components\ColorPicker as PaletteColorPicker;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Components\Repeater\TableColumn;
 
@@ -113,7 +115,19 @@ class Settings extends Page implements HasForms
                     ->aside()
                     ->schema([
 
-                        ColorPicker::make(SiteSettings::PRIMARY_COLOR->value),
+                        ColorPicker::make(SiteSettings::PRIMARY_COLOR->value)
+                            ->helperText(__('Primary accent color used for links, buttons, etc.')),
+
+                        PaletteColorPicker::make(SiteSettings::NEUTRAL_COLOR->value)
+                            ->label(__('Neutral color'))
+                            ->colors([
+                                'stone' => Color::Stone,
+                                'neutral' => Color::Neutral,
+                                'zinc' => Color::Zinc,
+                                'gray' => Color::Gray,
+                                'slate' => Color::Slate,
+                            ])->storeAsKey()
+                            ->helperText(__('What shade of gray would you use? This color is used for backgrounds, borders.')),
 
                         Select::make(SiteSettings::HEADING_FONT->value)
                             ->options(Font::class)
