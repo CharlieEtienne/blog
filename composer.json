@@ -6,7 +6,7 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "andreiio/blade-iconoir": "^4.7",
         "awcodes/palette": "^2.0@beta",
         "charlieetienne/palette-generator": "^1.0",
