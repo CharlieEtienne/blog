@@ -79,6 +79,8 @@ class Post extends Model
         return Attribute::make(
             fn () => $this->body ?
                 RichContentRenderer::make($this->body)
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDisk('public')
                     ->customBlocks([
                         CodeBlock::class,
                     ])
