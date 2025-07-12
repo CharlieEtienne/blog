@@ -63,7 +63,7 @@ input[type="search"]::-webkit-search-results-decoration {
     prose-pre:shadow-black/5
     prose-strong:font-medium
     prose-code:font-mono
-    prose-code:rounded-sm
+    prose-code:rounded-lg
     prose-code:px-1
     prose-code:py-0.5
     prose-code:font-normal
