@@ -80,7 +80,9 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .phiki {
-    @apply rounded-lg p-6 text-base shadow-md shadow-black/5 ring-1 ring-black/5 font-normal;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    @apply rounded-lg p-6 text-base shadow-md shadow-black/5 ring-1 ring-black/5 font-normal overflow-x-auto;
 }
 
 .colored {
