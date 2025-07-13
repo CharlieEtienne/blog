@@ -1,9 +1,12 @@
-@php use App\Support\TableOfContents; @endphp
+@php
+    use App\Support\TableOfContents;
+    use App\Enums\Analytics;
+@endphp
 <x-app
     :description="$post->description"
     :image="$post->image"
     :title="$post->title"
-    data-pan="posts-{{ $post->slug }}"
+    data-pan="{{ Analytics::POSTS->value }}-{{ $post->slug }}"
 >
     <div class="container">
         <div class="max-w-4xl mx-auto">

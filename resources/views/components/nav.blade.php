@@ -1,5 +1,6 @@
 @php
     use App\Support\Icons;
+    use App\Enums\Analytics;
     use App\Enums\MainPages;
     use App\Enums\SiteSettings;
 @endphp
@@ -23,7 +24,7 @@
             @endphp
 
             <a
-                data-pan="main-menu-{{ str($name)->slug()->toString() }}"
+                data-pan="{{ Analytics::MAIN_MENU->value }}-{{ str($name)->slug()->toString() }}"
                 href="{{ $url }}"
                 target="{{ data_get($menuItem, 'open_in_new_tab') ? '_blank' : '' }}"
                 @if(!data_get($menuItem, 'open_in_new_tab') && !str_contains($url,'#')) wire:navigate.hover @endif
@@ -43,7 +44,7 @@
 
         <x-dropdown>
             <x-slot:btn
-                data-pan="main-menu-more"
+                data-pan="{{ Analytics::MAIN_MENU->value }}-more"
                 class="transition-colors hover:text-primary-600 dark:hover:text-primary-500 cursor-pointer"
             >
                 <div class="menu-icon" x-bind:class="{ 'active': open }">
@@ -74,7 +75,7 @@
                             }
                         @endphp
                         <x-dropdown.item
-                            data-pan="dropdown-menu-{{ str($name)->slug()->toString() }}"
+                            data-pan="{{ Analytics::DROPDOWN_MENU->value }}-{{ str($name)->slug()->toString() }}"
                             href="{{ $url }}"
                             target="{{ data_get($dropdownItem, 'data.open_in_new_tab') ? '_blank' : '' }}"
                         >

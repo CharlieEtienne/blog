@@ -1,5 +1,6 @@
 @php
     use App\Enums\SiteSettings;
+    use App\Enums\Analytics;
     use App\Support\ColoredText;
     use Illuminate\Support\Facades\Storage;
     use Filament\Forms\Components\RichEditor\RichContentRenderer;
@@ -29,11 +30,11 @@
 
         @if(filled(SiteSettings::ABOUT_TEXT->get()) && SiteSettings::ABOUT_TEXT->get() !== "<p></p>")
             <div class="flex gap-2 justify-center items-center mt-7 text-center md:mt-11">
-                <x-btn size="md" href="#about" data-pan="home-button-about">
+                <x-btn size="md" href="#about" data-pan="{{ Analytics::HOME->value }}-button-about">
                     {{ __('About') }}
                 </x-btn>
 
-                <x-btn primary size="md" href="#latest" data-pan="home-button-latest">
+                <x-btn primary size="md" href="#latest" data-pan="{{ Analytics::HOME->value }}-button-latest">
                     {{ __('Blog') }}
                 </x-btn>
             </div>
@@ -52,7 +53,7 @@
             </ul>
 
             <div class="mt-16 text-center">
-                <x-btn primary wire:navigate href="{{ route('posts.index') }}" data-pan="home-button-browse-all-posts">
+                <x-btn primary wire:navigate href="{{ route('posts.index') }}" data-pan="{{ Analytics::HOME->value }}-button-browse-all-posts">
                     {{ __('Browse all posts') }}
                 </x-btn>
             </div>
