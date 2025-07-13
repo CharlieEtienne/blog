@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Pan\PanConfiguration;
 use App\Enums\SiteSettings;
 use Illuminate\Support\Carbon;
 use Filament\Support\Assets\Js;
@@ -47,6 +48,8 @@ class AppServiceProvider extends ServiceProvider
                 ->numbers()
                 ->uncompromised();
         });
+
+        PanConfiguration::maxAnalytics(10000);
 
         FilamentColor::register([
             'primary' => $this->cachedGeneratedPalette(

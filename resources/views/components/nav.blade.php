@@ -23,6 +23,7 @@
             @endphp
 
             <a
+                data-pan="main-menu-{{ str($name)->slug()->toString() }}"
                 href="{{ $url }}"
                 target="{{ data_get($menuItem, 'open_in_new_tab') ? '_blank' : '' }}"
                 @if(!data_get($menuItem, 'open_in_new_tab') && !str_contains($url,'#')) wire:navigate.hover @endif
@@ -42,6 +43,7 @@
 
         <x-dropdown>
             <x-slot:btn
+                data-pan="main-menu-more"
                 class="transition-colors hover:text-primary-600 dark:hover:text-primary-500 cursor-pointer"
             >
                 <div class="menu-icon" x-bind:class="{ 'active': open }">
@@ -72,7 +74,8 @@
                             }
                         @endphp
                         <x-dropdown.item
-                             href="{{ $url }}"
+                            data-pan="dropdown-menu-{{ str($name)->slug()->toString() }}"
+                            href="{{ $url }}"
                             target="{{ data_get($dropdownItem, 'data.open_in_new_tab') ? '_blank' : '' }}"
                         >
                             {!! svg(data_get($dropdownItem, 'data.icon'), 'size-4')->toHtml() !!}

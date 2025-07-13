@@ -3,6 +3,7 @@
     :description="$post->description"
     :image="$post->image"
     :title="$post->title"
+    data-pan="posts-{{ $post->slug }}"
 >
     <div class="container">
         <div class="max-w-4xl mx-auto">

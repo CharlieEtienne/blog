@@ -21,6 +21,7 @@
                         @endphp
 
                         <a
+                            data-pan="footer-menu-{{ str($name)->slug()->toString() }}"
                             href="{{ $url }}"
                             target="{{ data_get($footerMenuItem, 'open_in_new_tab') ? '_blank' : '' }}"
                             @if(!data_get($footerMenuItem, 'open_in_new_tab') && !str_contains($url,'#')) wire:navigate.hover @endif

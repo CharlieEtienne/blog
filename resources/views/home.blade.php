@@ -29,11 +29,11 @@
 
         @if(filled(SiteSettings::ABOUT_TEXT->get()) && SiteSettings::ABOUT_TEXT->get() !== "<p></p>")
             <div class="flex gap-2 justify-center items-center mt-7 text-center md:mt-11">
-                <x-btn size="md" href="#about">
+                <x-btn size="md" href="#about" data-pan="home-button-about">
                     {{ __('About') }}
                 </x-btn>
 
-                <x-btn primary size="md" href="#latest">
+                <x-btn primary size="md" href="#latest" data-pan="home-button-latest">
                     {{ __('Blog') }}
                 </x-btn>
             </div>
@@ -52,7 +52,7 @@
             </ul>
 
             <div class="mt-16 text-center">
-                <x-btn primary wire:navigate href="{{ route('posts.index') }}">
+                <x-btn primary wire:navigate href="{{ route('posts.index') }}" data-pan="home-button-browse-all-posts">
                     {{ __('Browse all posts') }}
                 </x-btn>
             </div>
