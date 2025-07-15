@@ -1,5 +1,7 @@
 # TALL Stack Blog App
 
+> THIS IS A WORK IN PROGRESS!
+
 A fully-featured, configurable blog.
 
 Clone the project, log in as admin, tweak some settings and push to prod ☁️.
