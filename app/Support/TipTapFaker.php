@@ -42,4 +42,28 @@ class TipTapFaker
         ];
     }
 
+    public static function codeCustomBlock(): array
+    {
+        return [
+            "type" => "customBlock",
+            "attrs" => [
+                "config" => [
+                    "code" => <<<'PHP'
+public static function content(...$blocks): array
+{
+    return [
+        "type" => "doc",
+        "content" => [
+            ...$blocks,
+        ],
+    ];
+}
+PHP,
+                    "language" => "php"
+                ],
+                "id" => "code"
+            ]
+        ];
+    }
+
 }
