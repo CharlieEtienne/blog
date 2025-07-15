@@ -10,11 +10,11 @@ class TableOfContents
 
     protected string $view = 'components.table-of-contents';
 
-    public static function generate(?array $doc): self {
+    public static function generate(array|string|null $doc): self {
 
         $instance = new self();
 
-        if (empty($doc)) {
+        if (empty($doc) || is_string($doc)) {
             return $instance;
         }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\SiteSettings;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Translatable\HasTranslations;
 use App\Filament\CustomBlocks\CodeBlock;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\RichEditorPlugins\IdPlugin;
@@ -38,13 +39,19 @@ use Filament\Forms\Components\RichEditor\RichContentRenderer;
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     protected $withCount = ['comments'];
 
     protected $casts = [
         'published_at' => 'datetime',
         'body' => 'array',
+    ];
+
+    public array $translatable = [
+        'title',
+        'excerpt',
+        'body',
     ];
 
     public function author(): BelongsTo

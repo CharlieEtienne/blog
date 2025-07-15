@@ -17,6 +17,7 @@ use Illuminate\Validation\Rules\Password;
 use Filament\Support\Facades\FilamentColor;
 use Filament\Support\Facades\FilamentAsset;
 use CharlieEtienne\PaletteGenerator\PaletteGenerator;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Forms\Components\RichEditor\RichContentRenderer;
 
 class AppServiceProvider extends ServiceProvider
@@ -63,6 +64,10 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         RichContentRenderer::mixin(new RichContentRendererMixin());
+
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch->locales(['en','fr']); // also accepts a closure
+        });
     }
 
     public function cachedGeneratedPalette(string $color): array

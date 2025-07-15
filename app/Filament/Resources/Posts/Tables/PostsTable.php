@@ -9,6 +9,7 @@ use Filament\Support\Enums\FontFamily;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 
 class PostsTable
 {
