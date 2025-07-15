@@ -22,8 +22,8 @@ It's fully open source.
   - [x] Tags
   - [x] Menu Builder
   - [x] Analytics with panphp/pan
+  - [x] Multilingual
   - [ ] Comments
-  - [ ] Multilingual
   - [ ] CMS Pages
   - [ ] Portfolio
 
