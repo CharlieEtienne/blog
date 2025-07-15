@@ -58,7 +58,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentInfoWidget::class,
             ])
             ->plugins([
-                SpatieTranslatablePlugin::make()->defaultLocales(['en', 'fr'])
+                SpatieTranslatablePlugin::make()->defaultLocales(['en'])
             ])
             ->middleware([
                 EncryptCookies::class,

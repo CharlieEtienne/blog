@@ -7,10 +7,12 @@ class TipTapFaker
     public static function content(...$blocks): array
     {
         return [
-            "type" => "doc",
-            "content" => [
-                ...$blocks,
-            ],
+            "en" => [
+                "type" => "doc",
+                "content" => [
+                    ...$blocks,
+                ],
+            ]
         ];
     }
     public static function paragraph(): array

@@ -10,6 +10,8 @@ use App\Enums\SiteSettings;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
 use Filament\Support\Colors\Color;
+use LaravelLang\LocaleList\Locale;
+use App\Support\AvailableLanguages;
 use Filament\Support\Icons\Heroicon;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Select;
@@ -439,6 +441,27 @@ class Settings extends Page implements HasForms
                                 ->collapsible()
                                 ->collapsed()
                                 ->itemLabel(fn (array $state): ?string => MainPages::tryFrom($state['page'] ?? '')?->getTitle() ?? $state['name'] ?? null),
+
+                    ])->columns(1),
+
+                Section::make()
+                    ->heading(__('Localization'))
+                    ->description(__('Imagine having a multilingual website...'))
+                    ->icon(Heroicon::OutlinedLanguage)
+                    ->aside()
+                    ->schema([
+                        Select::make(SiteSettings::LANGUAGES->value)
+                            ->label(__('Languages'))
+                            ->multiple()
+                            ->searchable()
+                            ->options(AvailableLanguages::options())
+                            ->helperText(__("Choose all the available languages on your blog.")),
+                        Select::make(SiteSettings::DEFAULT_LANGUAGE->value)
+                            ->label(__('Default language'))
+                            ->options(AvailableLanguages::options()),
+                        Select::make(SiteSettings::FALLBACK_LANGUAGE->value)
+                            ->label(__('Fallback language'))
+                            ->options(AvailableLanguages::options()),
 
                     ])->columns(1),
 

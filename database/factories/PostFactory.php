@@ -27,7 +27,7 @@ class PostFactory extends Factory
         $slug  = str($title)->slug();
 
         return [
-            'title'        => $title,
+            'title'        => ["en" => [$title]],
             'body'         => TipTapFaker::content(
                 TipTapFaker::h2(),
                 TipTapFaker::paragraph(),

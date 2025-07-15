@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Posts;
 
+use App\Enums\SiteSettings;
 use App\Filament\Resources\Posts\Pages\CreatePost;
 use App\Filament\Resources\Posts\Pages\EditPost;
 use App\Filament\Resources\Posts\Pages\ListPosts;
@@ -22,6 +23,11 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static function getTranslatableLocales(): array
+    {
+        return SiteSettings::LANGUAGES->get();
+    }
 
     public static function form(Schema $schema): Schema
     {

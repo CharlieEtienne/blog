@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection NonAsciiCharacters */
+
 namespace App\Providers;
 
 use Pan\PanConfiguration;
@@ -9,6 +11,8 @@ use Filament\Support\Assets\Js;
 use Illuminate\Support\Facades\DB;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\URL;
+use App\Support\AvailableLanguages;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +20,7 @@ use App\Mixins\RichContentRendererMixin;
 use Illuminate\Validation\Rules\Password;
 use Filament\Support\Facades\FilamentColor;
 use Filament\Support\Facades\FilamentAsset;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use CharlieEtienne\PaletteGenerator\PaletteGenerator;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Forms\Components\RichEditor\RichContentRenderer;
@@ -32,42 +37,67 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @throws \ReflectionException
      */
     public function boot(): void
+    {
+        $this->laravelGoodies🤘();
+        $this->setAppLanguageDefaults();
+        $this->setAppPasswordsDefaults();
+        $this->setAppAnalyticsDefaults();
+        $this->setFilamentDefaults();
+        $this->registerFilamentAssets();
+    }
+
+    public function laravelGoodies🤘(): void
     {
         DB::prohibitDestructiveCommands(app()->isProduction());
         URL::forceScheme('https');
         Vite::useAggressivePrefetching();
         Model::unguard();
         Model::automaticallyEagerLoadRelationships();
-        Carbon::setLocale(config('app.locale'));
+    }
+
+    public function setAppLanguageDefaults(): void
+    {
+        App::setLocale(SiteSettings::DEFAULT_LANGUAGE->get() ?? 'en');
+        App::setFallbackLocale(SiteSettings::FALLBACK_LANGUAGE->get() ?? 'en');
+        Carbon::setLocale(SiteSettings::DEFAULT_LANGUAGE->get() ?? 'en');
+        LaravelLocalization::setSupportedLocales(AvailableLanguages::get());
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch->locales(SiteSettings::LANGUAGES->get());
+        });
+    }
+
+    public function setAppPasswordsDefaults(): void
+    {
         Password::defaults(function () {
             return Password::min(8)
                 ->mixedCase()
                 ->numbers()
                 ->uncompromised();
         });
+    }
 
-        PanConfiguration::maxAnalytics(10000);
-
+    public function setFilamentDefaults(): void
+    {
         FilamentColor::register([
-            'primary' => $this->cachedGeneratedPalette(
-                SiteSettings::PRIMARY_COLOR->get()
-            ),
+            'primary' => $this->cachedGeneratedPalette(SiteSettings::PRIMARY_COLOR->get()),
             'gray' => Color::{ucfirst(SiteSettings::NEUTRAL_COLOR->get())},
         ]);
 
+        RichContentRenderer::mixin(new RichContentRendererMixin());
+    }
+
+    public function registerFilamentAssets(): void
+    {
         FilamentAsset::register([
             Js::make('rich-content-plugins/IdExtension', __DIR__ . '/../../resources/js/dist/filament/rich-content-plugins/IdExtension.js')->loadedOnRequest(),
         ]);
+    }
 
-        RichContentRenderer::mixin(new RichContentRendererMixin());
-
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch->locales(['en','fr']); // also accepts a closure
-        });
+    public function setAppAnalyticsDefaults(): void
+    {
+        PanConfiguration::maxAnalytics(10000);
     }
 
     public function cachedGeneratedPalette(string $color): array

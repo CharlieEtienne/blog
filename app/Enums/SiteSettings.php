@@ -35,6 +35,9 @@ enum SiteSettings: string
     case MAIN_MENU_MORE = 'main_menu_more';
     case FOOTER_MENU = 'footer_menu';
     case PERMALINKS = 'permalinks';
+    case LANGUAGES = 'languages';
+    case DEFAULT_LANGUAGE = 'default_language';
+    case FALLBACK_LANGUAGE = 'fallback_language';
 
     /**
      * Get the default value for the setting
@@ -176,6 +179,9 @@ enum SiteSettings: string
                 ],
             ],
             self::PERMALINKS => collect(MainPages::cases())->mapWithKeys(fn(MainPages $page) => [$page->value => $page->getDefaultSlug()])->toArray(),
+            self::LANGUAGES => ['en'],
+            self::DEFAULT_LANGUAGE => 'en',
+            self::FALLBACK_LANGUAGE => 'en',
         };
     }
 

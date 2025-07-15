@@ -63,7 +63,7 @@
                     @if (! empty($post->categories))
                         <div class="flex gap-2 mt-6 justify-center flex-wrap place-self-center">
                             @foreach ($post->categories->take(2) as $category)
-                                <a wire:navigate href="{{ route('categories.show', $category->slug) }}" class="px-2 py-1 text-xs font-medium uppercase rounded-sm border border-gray-200 dark:border-gray-700 transition-colors hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400">
+                                <a wire:navigate href="{{ route('categories.show', ['category' => $category]) }}" class="px-2 py-1 text-xs font-medium uppercase rounded-sm border border-gray-200 dark:border-gray-700 transition-colors hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400">
                                     {{ $category->name }}
                                 </a>
                             @endforeach
@@ -73,7 +73,7 @@
                     @if (! empty($post->tags))
                         <div class="flex gap-2 mt-6 justify-center flex-wrap place-self-center">
                             @foreach ($post->tags->take(10) as $tag)
-                                <a wire:navigate href="{{ route('tags.show', $tag->slug) }}" class="px-2 py-1 text-sm rounded-sm bg-gray-50 dark:bg-gray-800 transition-colors hover:bg-primary-100 hover:text-primary-600 dark:hover:bg-primary-950 dark:hover:text-primary-300">
+                                <a wire:navigate href="{{ route('tags.show', ['tag' => $tag]) }}" class="px-2 py-1 text-sm rounded-sm bg-gray-50 dark:bg-gray-800 transition-colors hover:bg-primary-100 hover:text-primary-600 dark:hover:bg-primary-950 dark:hover:text-primary-300">
                                     #{{ $tag->name }}
                                 </a>
                             @endforeach
