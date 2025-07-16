@@ -34,12 +34,12 @@
                 @if(!data_get($menuItem, 'open_in_new_tab') && !str_contains($url,'#')) wire:navigate.hover @endif
                 @class([
                     'transition-colors hover:text-primary-600 dark:hover:text-primary-500',
-                    'text-primary-600 dark:text-primary-500' => request()->url() === $url
+                    'text-primary-600 dark:text-primary-500' => str(request()->url())->remove('/' . app()->getLocale())->toString() === $url
                 ])
             >
                 {!! Icons::getHeroicon(
                     name: str(data_get($menuItem, 'icon'))->remove("o-"),
-                    isOutlined: request()->url() !== $url,
+                    isOutlined: str(request()->url())->remove('/' . app()->getLocale())->toString() !== $url,
                     class: 'mx-auto size-6'
                 ) !!}
                 {{ $name }}
