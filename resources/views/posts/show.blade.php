@@ -56,14 +56,14 @@
                         <div class="flex-1 p-3 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
                             <x-heroicon-o-clock class="mx-auto mb-2 opacity-75 size-6" />
                             {{ $post->read_time }}<br/>
-                            {{ trans_choice('minute|minutes', $post->read_time) }}
+                            {{ trans_choice('minute read|minutes read', $post->read_time) }}
                         </div>
                     </div>
 
                     @if (! empty($post->categories))
                         <div class="flex gap-2 mt-6 justify-center flex-wrap place-self-center">
                             @foreach ($post->categories->take(2) as $category)
-                                <a wire:navigate href="{{ route('categories.show', $category->slug) }}" class="px-2 py-1 text-xs font-medium uppercase rounded-sm border border-gray-200 dark:border-gray-700 transition-colors hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400">
+                                <a wire:navigate href="{{ route('categories.show', ['category' => $category]) }}" class="px-2 py-1 text-xs font-medium uppercase rounded-sm border border-gray-200 dark:border-gray-700 transition-colors hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400">
                                     {{ $category->name }}
                                 </a>
                             @endforeach
@@ -73,7 +73,7 @@
                     @if (! empty($post->tags))
                         <div class="flex gap-2 mt-6 justify-center flex-wrap place-self-center">
                             @foreach ($post->tags->take(10) as $tag)
-                                <a wire:navigate href="{{ route('tags.show', $tag->slug) }}" class="px-2 py-1 text-sm rounded-sm bg-gray-50 dark:bg-gray-800 transition-colors hover:bg-primary-100 hover:text-primary-600 dark:hover:bg-primary-950 dark:hover:text-primary-300">
+                                <a wire:navigate href="{{ route('tags.show', ['tag' => $tag]) }}" class="px-2 py-1 text-sm rounded-sm bg-gray-50 dark:bg-gray-800 transition-colors hover:bg-primary-100 hover:text-primary-600 dark:hover:bg-primary-950 dark:hover:text-primary-300">
                                     #{{ $tag->name }}
                                 </a>
                             @endforeach

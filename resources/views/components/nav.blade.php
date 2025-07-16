@@ -11,6 +11,10 @@
 
     <div class="menu flex items-center gap-6 md:gap-8 font-normal text-sm">
 
+        @if(count(LaravelLocalization::getSupportedLocales()) > 1)
+            <x-language-switcher/>
+        @endif
+
         @foreach(SiteSettings::MAIN_MENU->get() ?? [] as $menuItem)
             @php
                 if(filled(data_get($menuItem, 'page')) && data_get($menuItem, 'page') !== 'custom'){
@@ -30,12 +34,12 @@
                 @if(!data_get($menuItem, 'open_in_new_tab') && !str_contains($url,'#')) wire:navigate.hover @endif
                 @class([
                     'transition-colors hover:text-primary-600 dark:hover:text-primary-500',
-                    'text-primary-600 dark:text-primary-500' => request()->url() === $url
+                    'text-primary-600 dark:text-primary-500' => str(request()->url())->remove('/' . app()->getLocale())->toString() === $url
                 ])
             >
                 {!! Icons::getHeroicon(
                     name: str(data_get($menuItem, 'icon'))->remove("o-"),
-                    isOutlined: request()->url() !== $url,
+                    isOutlined: str(request()->url())->remove('/' . app()->getLocale())->toString() !== $url,
                     class: 'mx-auto size-6'
                 ) !!}
                 {{ $name }}
@@ -65,12 +69,21 @@
                         </x-dropdown.divider>
                     @else
                         @php
+                            $defaultLanguage = SiteSettings::DEFAULT_LANGUAGE->get();
+                            $currentLocale = app()->getLocale();
+                            $localePrefix = ($currentLocale !== $defaultLanguage) ? "/{$currentLocale}" : "";
+
                             if(filled(data_get($dropdownItem, 'data.page')) && data_get($dropdownItem, 'data.page') !== 'custom'){
-                                $url = url(data_get(SiteSettings::PERMALINKS->get(), data_get($dropdownItem, 'data.page')));
+                                $path = data_get(SiteSettings::PERMALINKS->get(), data_get($dropdownItem, 'data.page'));
+                                $url = url($localePrefix . '/' . $path);
                                 $name = MainPages::tryFrom(data_get($dropdownItem, 'data.page'))->getTitle();
                             }
                             else{
-                                $url = url(data_get($dropdownItem, 'data.url'));
+                                $path = data_get($dropdownItem, 'data.url');
+                                // Don't add locale prefix to external URLs or anchor links
+                                $url = (str_starts_with($path, 'http') || str_starts_with($path, '#') || str_starts_with($path, 'mailto:'))
+                                    ? url($path)
+                                    : url($localePrefix . $path);
                                 $name = data_get($dropdownItem, 'data.name');
                             }
                         @endphp

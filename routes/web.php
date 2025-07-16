@@ -7,24 +7,33 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Enums\SiteSettings;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('/' . data_get(SiteSettings::PERMALINKS->get(), MainPages::HOME->value), HomeController::class)
-    ->name('home');
+// Define the localized route group
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]
+], function() {
 
-Route::get('/' . data_get(SiteSettings::PERMALINKS->get(), MainPages::BLOG->value), [PostController::class, 'index'])
-    ->name('posts.index');
+        // Home route
+        Route::get('' . data_get(SiteSettings::PERMALINKS->get(), MainPages::HOME->value), HomeController::class)->name('home');
 
-Route::get('/' . data_get(SiteSettings::PERMALINKS->get(), MainPages::BLOG->value) . '/{post:slug}', [PostController::class, 'show'])
-    ->name('posts.show');
+        // Blog routes
+        Route::prefix(data_get(SiteSettings::PERMALINKS->get(), MainPages::BLOG->value, 'blog'))->group(function () {
+            Route::get('', [PostController::class, 'index'])->name('posts.index');
+            Route::get('/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+        });
 
-Route::get('/' . data_get(SiteSettings::PERMALINKS->get(), MainPages::CATEGORIES->value), [CategoryController::class, 'index'])
-    ->name('categories.index');
+        // Categories routes
+        Route::prefix(data_get(SiteSettings::PERMALINKS->get(), MainPages::CATEGORIES->value, 'categories'))->group(function () {
+            Route::get('', [CategoryController::class, 'index'])->name('categories.index');
+            Route::get('/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+        });
 
-Route::get('/' . data_get(SiteSettings::PERMALINKS->get(), MainPages::CATEGORIES->value) . '/{category:slug}', [CategoryController::class, 'show'])
-    ->name('categories.show');
+        // Tags routes
+        Route::prefix(data_get(SiteSettings::PERMALINKS->get(), MainPages::TAGS->value, 'tags'))->group(function () {
+            Route::get('', [TagController::class, 'index'])->name('tags.index');
+            Route::get('/{tag:slug}', [TagController::class, 'show'])->name('tags.show');
+        });
 
-Route::get('/' . data_get(SiteSettings::PERMALINKS->get(), MainPages::TAGS->value), [TagController::class, 'index'])
-    ->name('tags.index');
-
-Route::get('/' . data_get(SiteSettings::PERMALINKS->get(), MainPages::TAGS->value) . '/{tag:slug}', [TagController::class, 'show'])
-    ->name('tags.show');
+    });

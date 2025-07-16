@@ -25,10 +25,10 @@ enum MainPages: string
     public function getTitle(): string
     {
         return match ($this) {
-            self::HOME => 'Home',
-            self::BLOG => 'Blog',
-            self::CATEGORIES => 'Categories',
-            self::TAGS => 'Tags',
+            self::HOME => __('Home'),
+            self::BLOG => __('Blog'),
+            self::CATEGORIES => __('Categories'),
+            self::TAGS => __('Tags'),
         };
     }
 }
