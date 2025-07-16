@@ -1,0 +1,23 @@
+{
+    ":count comment|:count comments": ":count comment|:count comments",
+    ":count minute|:count minutes": ":count minute|:count minutes",
+    "About": "About",
+    "Blog": "Blog",
+    "Browse all posts": "Browse all posts",
+    "Categories": "Categories",
+    "Continue reading": "Continue reading",
+    "Drafted": "Drafted",
+    "Here are some other articles you may like": "Here are some other articles you may like",
+    "Home": "Home",
+    "Latest posts": "Latest posts",
+    "Modified": "Modified",
+    "More": "More",
+    "No articles for this tag yet!": "No articles for this tag yet!",
+    "No articles in this category yet!": "No articles in this category yet!",
+    "Published": "Published",
+    "Summary": "Summary",
+    "Tags": "Tags",
+    "Written by": "Written by",
+    "comment|comments": "comment|comments",
+    "minute read|minutes read": "minute read|minutes read"
+}
