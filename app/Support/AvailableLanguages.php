@@ -17,6 +17,11 @@ class AvailableLanguages
         return array_map(function ($language) { return ucfirst($language[ 'native' ]) . " ({$language['name']})"; }, self::all());
     }
 
+    public static function availableOptions(): array
+    {
+        return array_map(function ($language) { return ucfirst($language[ 'native' ]) . " ({$language['name']})"; }, self::get());
+    }
+
     public static function all(): array
     {
         return [

@@ -56,7 +56,7 @@
                         <div class="flex-1 p-3 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
                             <x-heroicon-o-clock class="mx-auto mb-2 opacity-75 size-6" />
                             {{ $post->read_time }}<br/>
-                            {{ trans_choice('minute|minutes', $post->read_time) }}
+                            {{ trans_choice('minute read|minutes read', $post->read_time) }}
                         </div>
                     </div>
 
