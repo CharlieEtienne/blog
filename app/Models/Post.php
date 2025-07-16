@@ -109,7 +109,7 @@ class Post extends Model
     public function description() : Attribute
     {
         return Attribute::make(
-            fn () => str($this->excerpt ?? $this->textContent ?? '')->limit(160),
+            fn () => str(filled($this->excerpt) ? $this->excerpt : $this->textContent ?? '')->limit(160),
         )->shouldCache();
     }
 
